@@ -1,0 +1,10 @@
+#/etc/varnish
+DAEMON_OPTS="-a *:8009 \
+  -b localhost:8008 \
+  -T localhost:6082 \
+  -f /usr/local/etc/varnish/bras.vcl \
+  -p thread_pool_max=1500 \
+  -p thread_pools=5 \
+  -p listen_depth=512 \
+  -p client_http11=on \
+  -s malloc,256m"
