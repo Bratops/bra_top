@@ -20,7 +20,7 @@ server {
   #prevent any page from being shown in an iframe
   add_header X-Frame-Options DENY;
   #for ie
-  add_header X-XSS-Protection 1:mode=block;
+  add_header X-XSS-Protection "1:mode=block";
   #prevent ie from mime-sniffing
   add_header  X-Content-Type-Options nosniff;
 

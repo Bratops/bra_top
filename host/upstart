@@ -1,0 +1,24 @@
+#!upstart
+description "bras front end node.js server"
+author      "nsn"
+
+start on started networking
+stop on shutdown
+
+script
+  node=/home/nsn/.nvm/v0.10.30/bin/node
+  app=/home/nsn/bras/current/server/app.js
+  app_log=/home/nsn/bras/shared/log/app.log
+  NODE_ENV=production PORT=39000 $node $app >> $app_log
+end script
+
+pre-start script
+    applog=/home/nsn/bras/shared/log/upstart.log
+    # Date format same as (new Date()).toISOString() for consistency
+    echo "[`date -u +%Y-%m-%dT%T.%3NZ`] (sys) Starting" >> $applog
+end script
+
+pre-stop script
+    applog=/home/nsn/bras/shared/log/upstart.log
+    echo "[`date -u +%Y-%m-%dT%T.%3NZ`] (sys) Stopping" >> $applog
+end script
